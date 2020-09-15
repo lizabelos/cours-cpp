@@ -25,7 +25,7 @@
 3
 ```
 
-### Execute un script directement
+### Exécution d'un script directement
 ```bash
 $ python script.py
 ```

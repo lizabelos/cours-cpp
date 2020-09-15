@@ -1,0 +1,26 @@
+.narrow p
+{
+margin: 5px 0;
+}
+
+.narrow li
+{
+font-size: xx-large;
+}
+
+.narrow blockquote
+{
+width: 70%;
+margin: 10px auto;
+padding: 10px;
+}
+
+.narrow td
+{
+font-size: 26pt;
+}
+
+.narrow pre
+{
+width: 500px;
+}

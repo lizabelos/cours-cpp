@@ -104,7 +104,7 @@ Utilisation de ce programme pour gérer la compilation/link
 ## Noms des fichiers en C++
 ### Pour plus tard dans le cours
 - Headers C++ : <a style="color: #fb2c40">.h</a>
-- Les bibliothèques : .lib ou .dll (Windows) ou <a style="color: #fb2c40">.a</a> ou <a style="color: #fb2c40">.so</a> (Linux/Mac)
+- Les bibliothèques : <a style="color: #fb2c40">.lib</a> ou <a style="color: #fb2c40">.dll</a> (Windows) ou <a style="color: #fb2c40">.a</a> ou <a style="color: #fb2c40">.so</a> (Linux/Mac)
 
 
 

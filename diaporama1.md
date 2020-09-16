@@ -108,5 +108,21 @@ Utilisation de ce programme pour gérer la compilation/link
 
 
 
+# Premier programme
+## Hello World!
+
+```cpp[|1|2|4-8|6]
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    cout << "Hello World!" << endl;
+    return 0;
+}
+```
+
+
+
 ## Page du cours
 http://imagine.enpc.fr/~monasse/Info/

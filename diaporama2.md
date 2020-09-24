@@ -20,7 +20,7 @@ Les <a style="color: #2c40fb">**variables**</a> sont des *mémoires* dans lequel
 int i; // Définition (valeur inconnue)
 i=2;   // Affectation
 int j;
-j=i;  // Affecte le valeur de i dans j
+j=i;  // Affecte la valeur de i dans j
 i=1;   // Ne modifie que i, pas j!
 cout << i << " " << j << " "; // Affiche "1 2"
 int k,l,m; // Définition multiple

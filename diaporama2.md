@@ -66,21 +66,21 @@ bool t=true;       // Booléen (vrai ou faux)
 
 
 
-### Quelques notion de mémoire
+### Quelques notions de mémoire
 
 - 1 <a style="color: #2c40fb">octet</a> = 8 <a style="color: #fb2c40">bits</a>
-- 1 <a style="color: #fb2c40">bit</a> vaut <a style="color: #40fb2c">0</a> ou <a style="color: #40fb2c">1</a>.
+- 1 <a style="color: #fb2c40">bit</a> vaut <a style="color: #40fb2c">0</a> ou <a style="color: #40fb2c">1</a>
 
-#### ```int```: souvent stockées sur 4 <a style="color: #2c40fb">octets</a>:
+#### ```int``` : souvent stockées sur 4 <a style="color: #2c40fb">octets</a> :
 
 - 32 <a style="color: #fb2c40">bits</a>
 - 2^32=4294967296 valeurs possibles
-- Entier relatif: −2147483648 à 2147483647
+- Entier relatif : −2147483648 à 2147483647
 
 
 
 
-### Type supplémentaires
+### Types supplémentaires
 ```cpp [1|2|3|4|5]
 float y=1.2f;           // Nombre réel simple précision
 unsigned int j=4;       // Entier naturel
@@ -95,8 +95,8 @@ complex<double> z(2,3); // Nombre complexe
 #### Operations usuelles
 <a style="color: #2c40fb">```+```</a>,<a style="color: #2c40fb">```-```</a>,<a style="color: #2c40fb">```*```</a>,<a style="color: #2c40fb">```/```</a>,<a style="color: #2c40fb">```%```</a>
 
-#### Raccourci
-```cpp []
+#### Raccourcis
+```cpp 
 int i=0; 
 i+=5; // Equivalent à i=i+5
 i-=3; // Equivalent à i=i-3
@@ -107,7 +107,7 @@ i%=3; // Equivalent à i=i%3
 
 
 
-### Attention au divisions !
+### Attention aux divisions !
 ```cpp [1-3|5-7]
 double x;
 x = 1 / 3; // Ici x = 0.0
@@ -153,15 +153,17 @@ Ils sont toujours entre parenthèses.
 
 
 ### La condition if/else
-#### Premier exemples
-```cpp [1-2|4-7]
+#### Premier exemple
+```cpp [1-2|4-9]
 if (i==0) // i est-il nul?
 	cout << "i est nul" << endl;
 	
 if (i>2)  // i est-il strictement plus grand que 2? 
 	j=3;
+else if (i < 1)  // i est-il strictement plus petit que 1?
+	j = 1 
 else
-	j=5;  // Si on est ici, c'est que i<=2
+	j=5;  // Si on est ici, c'est que 1 <= i <= 2
 ```
 
 
@@ -170,18 +172,15 @@ else
 #### Exemple plus compliqué
 ```cpp []
 if (i!=3 || (j==2 && k!=3) || !(i>j && i>k)) {
-	// Ici, i est différent de 3 ou alors
-	// j vaut 2 et k est différent de 3 ou alors
-	// on n'a pas i plus grand a la fois de j et de k 
 	cout << "Une première instruction" << endl;
 	cout << "Une deuxième instruction" << endl;
-    }
+}
 ```
 
 
 
-### Variable booléennes
-#### Ou comment stocker le résultat d'un test
+### Variables booléennes
+#### Stocker le résultat d'un test
 ```cpp
 bool t = ((i==3) || (j==4));
 if (t)
@@ -252,7 +251,7 @@ for (int i = 1, j=100; j>i; i=i+2,j=j-3) { // Multiple
 ## Les fonctions
 Il faut regrouper  les passages identiques en fonctions:
 - pour obtenir <a style="color: #2c40fb">un programme clair</a>
-- et pour <a style="color: #2c40fb">moins se fatiguer!</a>
+- et pour <a style="color: #2c40fb">moins se fatiguer !</a>
 
 <a style="color: #fb2c40">Attention à bien comprendre quand faire une fonction: </a>
 *Ne pas simplement découper un programme en petits morceaux sans aucune logique*
@@ -261,13 +260,13 @@ Il faut regrouper  les passages identiques en fonctions:
 
 ### Premier exemple
 ```cpp [1-3|5-10]
-void afficherCoucou() {
-	cout << "Coucou c'est moi !!" << endl;
+void afficherUneSalutation() {
+	cout << "Hey!" << endl;
 }
 
 int main() {
 	for (int i = 0; i < 10; i++) {
-		afficherCoucou();
+		afficherUneSalutation();
 	}
 	return 0;
 }
@@ -336,7 +335,7 @@ int main() {
 
 ### Passage par valeur
 ```cpp [1-5|]
-int echanger(int a, int b) {
+void echanger(int a, int b) {
 	int c = a;
 	a = b;
 	b = c;
@@ -354,7 +353,7 @@ int main() {
 
 ### Passage par référence
 ```cpp [1-5|]
-int echanger(int &a, int &b) {
+void echanger(int &a, int &b) {
 	int c = a;
 	a = b;
 	b = c;

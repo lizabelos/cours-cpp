@@ -167,7 +167,7 @@ Comportement <a style="color: #2c40fb">similaire</a> aux types de base :
 ```cpp
 Point a={2.3,3.4},b=a,c;     // Initialisations
 c=a;                         // Affectations
-Cercle C={{12,13},10.4,Red}; // Initialisation
+Cercle C={a,10.4,Red}; // Initialisation
 ```
 
 ### <a style="color: #fb2c40">Attention</a>

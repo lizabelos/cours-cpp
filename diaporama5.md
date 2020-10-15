@@ -424,3 +424,25 @@ int main() {
     return 0;
 }
 ```
+
+
+
+## Fonctions récursives
+```cpp [4-9|11-16]
+#include <iostream>
+using namespace std;
+
+int factoriel(int N){
+    if(N<=1)
+        return 1;
+    else
+        return(N*factoriel(N-1));
+}
+
+int main()
+{
+    int N = 10;
+    cout << N << "! = " << factoriel(N) << endl;
+    return 0;
+}
+```

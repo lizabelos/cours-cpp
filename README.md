@@ -7,3 +7,4 @@ Slides qui accompagne le cours de Pascal Monasse ([site du cours](http://imagine
 - [Cours 2](https://mathux.github.io/cours-cpp/cours2.html)
 - [Cours 3](https://mathux.github.io/cours-cpp/cours3.html)
 - [Cours 4](https://mathux.github.io/cours-cpp/cours4.html)
+- [Cours 5](https://mathux.github.io/cours-cpp/cours5.html)

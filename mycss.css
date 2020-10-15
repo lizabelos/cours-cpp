@@ -24,3 +24,50 @@ font-size: 26pt;
 {
 width: 500px;
 }
+
+#left {
+	margin: 10px 0 15px 20px;
+	text-align: left;
+	float: left;
+	z-index:-10;
+	width:48%;
+	font-size: 0.85em;
+	line-height: 1.5;
+}
+
+#right {
+	margin: 10px 0 15px 0;
+	float: right;
+	text-align: left;
+	z-index:-10;
+	width:48%;
+	font-size: 0.85em;
+	line-height: 1.5;
+}
+
+#center {
+	margin: 10px 0 15px 0;
+	float: center;
+	text-align: left;
+	z-index:-10;
+	width:100%;
+	font-size: 1em;
+	line-height: 1.5; 
+}
+
+#zero {
+        margin-bottom: 5cm;
+    	float: center;
+	text-align: left;
+	z-index:-10;
+	width:100%;
+	font-size: 1em;
+	line-height: 1.5; 
+}
+
+.container{
+    display: flex;
+}
+.col{
+    flex: 1;
+}

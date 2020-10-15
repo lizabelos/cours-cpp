@@ -408,7 +408,7 @@ int main() {
 
 
 ## Surcharge opérateur
-```cpp []
+```cpp [1-5|6-8|9-14]
 // Produit par un scalaire
 vect operator*(double s,vect m) { 
     vect p={s*m.x,s*m.y};

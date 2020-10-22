@@ -446,3 +446,9 @@ int main()
     return 0;
 }
 ```
+
+## Page du cours
+http://imagine.enpc.fr/~monasse/Info/
+
+### Fiche de référence du cours
+Poly : <a style="color: #fb2c40">page 89</a>

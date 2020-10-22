@@ -1,7 +1,7 @@
 # Introduction à la Programmation
 Slides qui accompagne le cours de Pascal Monasse ([site du cours](http://imagine.enpc.fr/~monasse/Info/)).
 
-Les diapositives suivent le pdf du cours chapitre par chapitre et sont inspirées des diapositives de ([Thomas Belos](https://thomas.belos.ovh/cours-de-cpp/).
+Les diapositives suivent le pdf du cours chapitre par chapitre et sont inspirées des diapositives de [Thomas Belos](https://thomas.belos.ovh/cours-de-cpp/).
 
 ## Liste des cours
 - [Cours 1](https://mathux.github.io/cours-cpp/cours1.html)

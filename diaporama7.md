@@ -4,6 +4,7 @@
 
 
 
+<!-- {% raw %} -->
 ## Tableaux bidimensionnels
 ### Principe
 ```cpp []
@@ -13,13 +14,11 @@ for (int i = 0; i < 2; i++) {
 		A[i][j] = i + j; // Attention: A[i,j] interdit!
 	}
 }
-{% raw %}
 int B[2][3] = {{1,2,3},{4,5,6}}; // Init possible
-{% endraw %}
 const int M = 2, N = 3;  // Dimension constante
 int C[M][N];
 ```
-
+<!-- {% endraw %} -->
 
 
 ## Tableaux bidimensionnels

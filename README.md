@@ -10,3 +10,4 @@ Les diapositives suivent le pdf du cours chapitre par chapitre et sont inspirée
 - [Cours 4](https://mathux.github.io/cours-cpp/cours4.html)
 - [Cours 5](https://mathux.github.io/cours-cpp/cours5.html)
 - [Cours 6](https://mathux.github.io/cours-cpp/cours6.html)
+- [Cours 7](https://mathux.github.io/cours-cpp/cours7.html)

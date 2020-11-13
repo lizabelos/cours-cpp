@@ -21,6 +21,7 @@ int C[M][N];
 <!-- {% endraw %} -->
 
 
+
 ## Tableaux bidimensionnels
 ### Schema
 ![image](./images/sl7/bitab.png)

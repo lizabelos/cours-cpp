@@ -56,7 +56,7 @@ struct obj{
 	int x;        // champs x
 	int f();      // méthode f() (déclaration)
 	int g(int y); // méthode g() (déclaration)
-}
+};
 
 int obj::f() { // méthode f() de obj (définition)
 	...
@@ -115,7 +115,7 @@ struct Vector {
     double x;   // champs x
     double y;   // champs y
     double norm();
-}
+};
 
 int Vector::norm() { // méthode f() de obj1 (définition)
 	return sqrt((x * x) + (x * x) + (y * y) + (y * y));
@@ -234,7 +234,7 @@ struct Vector {
     double x;
     double y;
     Vector operator*(double factor);
-}
+};
 
 Vector Vector::operator*(double factor) {
 	Vector result;

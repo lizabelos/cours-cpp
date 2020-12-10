@@ -1,5 +1,5 @@
 # Introduction au C++
-## Cours n°9 <div style="font-size:50%;">(chap 10 du poly)</div>
+## Cours n°9/10 <div style="font-size:50%;">(chap 10 du poly)</div>
 ### Mathis Petrovich
 
 

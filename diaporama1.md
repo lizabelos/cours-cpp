@@ -1,6 +1,7 @@
 # Introduction au C++
 ## Cours 1
-#### Mathis Petrovich
+### Liza Belos
+#### Slides par  Mathis Petrovich et Liza Belos
 
 
 

@@ -1,6 +1,7 @@
 # Introduction au C++
 ## Cours n°2 <div style="font-size:50%;">(chap 3 du poly)</div>
-### Mathis Petrovich
+### Liza Belos
+#### Slides par  Mathis Petrovich et Liza Belos
 
 
 

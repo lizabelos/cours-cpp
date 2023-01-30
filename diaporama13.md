@@ -96,9 +96,15 @@ Pivot : 52
 ## QuickSort
 ### Complexité dans le pire des cas
 $C_n = (N - 1) + C_{n-1}$
+
 $C_n = (N - 1) + (N - 2) + ... + 1 = O(N^2)$
+
+
+
+## QuickSort
 ### Complexité dans le meilleur des cas
 $C_n = \frac{N}{2} + C_{\frac{n}{2}}$
+
 $C_n = \frac{N}{2} + \frac{N}{4} + ... + 1 = O(N \log N)$
 
 

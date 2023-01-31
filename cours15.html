@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <meta name="description" content="Chapitre 3 du d'algorithmique et sturcutres de Données">
+    <meta name="author" content="Thomas Belos">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Algorithmique et Sturcutres de Données - Chapitre 3</title>
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/reset.min.css" integrity="sha512-Mjxkx+r7O/OLQeKeIBCQ2yspG1P5muhAtv/J+p2/aPnSenciZWm5Wlnt+NOUNA4SHbnBIE/R2ic0ZBiCXdQNUg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/reveal.min.css" integrity="sha512-A5PKBHoJQHdKjxpwyV+VhMsK7L3MMV1Ch2++rS0bn3xX8+5qJb3WpPvwJH1eqb6iMRtotfiOO7Jhl1qQ02Rwuw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/theme/black.min.css" integrity="sha512-DKeDMgkMDBNgY3g8T6H6Ft5cB7St0LOh5d69BvETIcTrP0E3d3KhANTMs5QOTMnenXy6JVKz/tENmffCLeXPiQ==" crossorigin="anonymous" referrerpolicy="no-referrer" id="theme" />
+
+    <link rel="stylesheet" href="mycss.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/plugin/highlight/monokai.min.css" integrity="sha512-z8wQkuDRFwCBfoj7KOiu1MECaRVoXx6rZQWL21x0BsVVH7JkqCp1Otf39qve6CrCycOOL5o9vgfII5Smds23rg==" crossorigin="anonymous" referrerpolicy="no-referrer" /></head>
+
+
+    <!-- Multi column -->
+    <style>
+        .container{
+            display: flex;
+        }
+        .col{
+            flex: 1;
+        }
+
+        .mytable {
+            border: 1px solid white !important;
+        }
+
+        .mytable tr {
+            border: 1px solid white !important;
+        }
+
+        .mytable td {
+            border: 1px solid white !important;
+        }
+
+        .eductnetlist li {
+            display: block;
+        }
+
+        .eductnetlist img {
+            border: 0px solid transparent !important;
+            display: inline-block !important;
+            vertical-align: middle !important;
+            background-color: transparent !important;
+            height: 48px !important;
+            width: auto !important;
+            margin: 0px 16px !important;
+        }
+
+        .instancename {
+            display: table-cell;
+            height: 64px !important;
+            width: auto !important;
+            color: white !important;
+        }
+
+        .eductnetlist a:hover .instancename {
+            color: #4d86ff !important;
+        }
+
+        .courselink {
+            display: block;
+            padding: 32px 16px;
+            font-size: 50%;
+        }
+    </style>
+
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h1>Algorithmique et Structures de Données</h1>
+            <h2>Chapitre 3<br>Diviser pour régner</h2>
+        </section>
+        <section>
+            <section>
+                <h3>Complexité de QuickSort</h3>
+            </section>
+            <section>
+                <span>
+                    Soit $N$ la taille du tableau à triller. Alors, le positionnement du pivot nécessite un parcours du tableau, donc $N - 1$ comparaisons.
+                </span><br><br>
+                <span class="fragment">
+                    Si nous notons $C_n$ la complexité et que nous nous retrouvons avec un pivot en position $i$, nous avons la relation de récurrence :<br>
+                    $C_n=(N-1)+C_i+C_{N-i-1}$
+                </span>
+            </section>
+            <section>
+                <span>
+                    En moyenne, $C_n=N+2C_{N/2}$.
+                </span><br><br>
+                <span class="fragment">
+                    En utilisant la relation de récurrent pour $C_{N/2}$, nous obtenons : <br>
+                    $C_n=N+2(N/2+2C_{N/4})=2N+4C_{N/4}$
+                </span>
+            </section>
+            <section>
+                 <span>
+                    Puis : $C_n=3N+8C_{N/8}$<br>
+                    etc.. etc..
+                </span><br><br>
+                <span class="fragment">
+                    Le processus s'arrête lorsque l'indice de droite ($N/8$) devient 1. Alors : <br>
+                    $C_n=(log\,N)N+NC_1$
+                </span><br><br>
+                <span class="fragment" style="border: 1px solid red;">
+                    Conclusion : $C_n = O(N\,log\,N)$ !
+                </span>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>Transformée de Fourier</h3>
+            </section>
+            <section>
+                <h4>Voici une onde...</h4>
+                <canvas id="combo-sine-wave" class="sketch" width="500" height="300"></canvas><br>
+                <span class="fragment">En 1D, cela peut représenter un son. En 2D, une image...</span><br>
+                <span class="fragment"><b>Problème : </b> Comment traiter et stocker efficacement cette onde ?</span>
+            </section>
+            <section>
+                <h4>Solution naïve, traiter et stocker l'onde tels quelle</h4>
+            </section>
+            <section>
+                <h4>Notre onde peut-être décomposée en plusieurs ondes sinusoïdales...</h4>
+                <canvas id="combo-sine-wave-split" class="sketch" width="500" height="500"></canvas>
+            </section>
+            <section>
+                <h4>Voici une onde carré...</h4>
+                <canvas id="square-wave" class="sketch" width="500" height="300"></canvas>
+            </section>
+            <section>
+                <h4>De même, celle-ci peut-être approximée en plusieurs onde sinusoïdale...</h4>
+                <canvas id="square-wave-split" class="sketch" width="500" height="500"></canvas>
+            </section>
+            <section>
+                <h4>Il faut beaucoup d'iterations pour obtenir une bonne reconstruction</h4>
+                <canvas id="square-wave-build-up" class="sketch" width="500" height="500"></canvas>
+                <p><input id="square-wave-build-up-slider" type="range" min="0" max="1" value="0" step="any"></p>
+            </section>
+        </section>
+        <section>
+            <h2>Crédit</h2>
+            <p>Crédit à <b>Jez Swanson</b> pour les animations. Source : <a href="http://www.jezzamon.com/fourier/">https://github.com/Jezzamonn/fourier</a></p>
+            <h2>TP3 - FFT</h2>
+            <ul class="eductnetlist" id="yui_3_17_2_1_1581079977365_77"><li class="activity resource modtype_resource " id="module-18782"><div id="yui_3_17_2_1_1581079977365_76"><div class="mod-indent-outer" id="yui_3_17_2_1_1581079977365_75"><div class="mod-indent"></div><div class="activity-wrapper" id="yui_3_17_2_1_1581079977365_74"><div class="activityinstance" id="yui_3_17_2_1_1581079977365_73"><a class="" onclick="window.open('https://educnet.enpc.fr/mod/resource/view.php?id=18782&amp;redirect=1', '', 'width=620,height=450,toolbar=no,location=no,menubar=no,copyhistory=no,status=no,directories=no,scrollbars=yes,resizable=yes'); return false;" href="https://educnet.enpc.fr/mod/resource/view.php?id=18782" id="yui_3_17_2_1_1581079977365_72"><img src="https://educnet.enpc.fr/theme/image.php/adaptable/core/1574268697/f/pdf" class="iconlarge activityicon" alt=" " role="presentation"><span class="instancename" id="yui_3_17_2_1_1581079977365_71">Énoncé<span class="accesshide "> Fichier</span></span></a></div></div></div></div></li><li class="activity resource modtype_resource " id="module-18783"><div><div class="mod-indent-outer"><div class="mod-indent"></div><div class="activity-wrapper"><div class="activityinstance"><a class="" onclick="window.open('https://educnet.enpc.fr/mod/resource/view.php?id=18783&amp;redirect=1', '', 'width=620,height=450,toolbar=no,location=no,menubar=no,copyhistory=no,status=no,directories=no,scrollbars=yes,resizable=yes'); return false;" href="https://educnet.enpc.fr/mod/resource/view.php?id=18783"><img src="https://educnet.enpc.fr/theme/image.php/adaptable/core/1574268697/f/archive" class="iconlarge activityicon" alt=" " role="presentation"><span class="instancename">Programme initial<span class="accesshide "> Fichier</span></span></a></div></div></div></div></li><li class="activity assign modtype_assign " id="module-18816"><div><div class="mod-indent-outer"><div class="mod-indent"></div><div class="activity-wrapper"><div class="activityinstance"><a class="" onclick="" href="https://educnet.enpc.fr/mod/assign/view.php?id=18816"><img src="https://educnet.enpc.fr/theme/image.php/adaptable/assign/1574268697/icon" class="iconlarge activityicon" alt=" " role="presentation"><span class="instancename">Tris<span class="accesshide "> Devoir</span></span></a></div></div></div></div></li></ul>
+            <a href="https://educnet.enpc.fr/course/view.php?id=619" class="courselink">Accéder à la page du cours</a>
+        </section>
+    </div>
+</div>
+<script src="http://www.jezzamon.com/fourier/main.bundle.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/reveal.min.js" integrity="sha512-uQGK5PLqAxTaCXSpiQXLYo93HzIRCBUek4jab5gDky9RN621pYpOh1oSxfmG301wW6OU4s8Bk0JDfi77JMZRuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/plugin/notes/notes.min.js" integrity="sha512-zT7Fnv76+94Gjt8yB3Y5zxJrfhA9BLafFepaO2ywAhKnPIrj/HWEmQqybnop+Z6h1St1QlQwiddrsPial8AjJw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/plugin/markdown/markdown.min.js" integrity="sha512-ik0i3CQNgrNfRPUyZGlVqKGpxWR//UV0Y+4y6FHeHvaX/T/TM2nLyjCDQr6Nl/VZrNF8zjkiQ/YL0bsT9GsbVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/plugin/highlight/highlight.min.js" integrity="sha512-PrMZUaiqYqRQyi4D71cIxqg/nyiclXEBLlR6A76tQP81iq6vrz9DBa+vLkn2efw3ECfYbKH1G+uLLpq6ZZ4dLA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/plugin/math/math.min.js" integrity="sha512-skPZpuRwuUAnF9iEEFBXc4zJaucKcHUDgY1wDBTv0ILy82C2gn8MJsbcinzj2u8r/iZjD/78HRgw2/n//poOhQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+        hash: true,
+        slideNumber: true,
+        backgroundTransition: 'slide',
+        transition: 'fade',
+        katex: {
+            version: 'latest',
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '\\[', right: '\\]', display: true}
+            ]
+        },
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ]
+    });
+</script>
+</body>
+</html>

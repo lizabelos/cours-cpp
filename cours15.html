@@ -84,7 +84,6 @@
             <h1>Algorithmique et Structures de Données</h1>
             <h2>Chapitre 3<br>Diviser pour régner</h2>
         </section>
-        <section>
             <section>
                 <h3>Complexité de QuickSort</h3>
             </section>
@@ -119,8 +118,6 @@
                     Conclusion : $C_n = O(N\,log\,N)$ !
                 </span>
             </section>
-        </section>
-        <section>
             <section>
                 <h3>Transformée de Fourier</h3>
             </section>
@@ -150,7 +147,48 @@
                 <canvas id="square-wave-build-up" class="sketch" width="500" height="500"></canvas>
                 <p><input id="square-wave-build-up-slider" type="range" min="0" max="1" value="0" step="any"></p>
             </section>
-        </section>
+            <section>
+                <h3>Transformée de Fourier Discrète</h3>
+            </section>
+            <section>
+                <h3>fft.cpp</h3>
+                <pre>
+                    <code>
+std::complex&#60;float&#62; dft(const std::complex&#60;float>&#62; f[], int n, int k, float s);
+                    </code>
+                </pre>
+                <span>$DFT(f)[k] = \frac{1}{\sqrt{N}}\sum_{j=0}^{N-1}f[j]e^{-\frac{2i\pi}{N} jk}.$</span><br>
+                <span>pour un $k$ donné</span>
+
+            </section>
+            <section>
+                <h3>test_fft.cpp</h3>
+                <span>$DFT(f)[k] = \frac{1}{\sqrt{N}}\sum_{j=0}^{N-1}f[j]e^{-\frac{2i\pi}{N} jk}.$</span><br>
+                <span>pour $\qquad k = 0,\dots,n-1.$</span>
+            </section>
+            <section>
+                <h3>Transformée de Fourier Rapide</h3>
+                <h4>Divier pour régner</h4>
+            </section>
+            <section>
+                Pour $N\geq2$, on sépare la somme dans la DFT en indices pairs et impairs:
+                $$\sqrt{N} DFT(f)[k] =
+                \sum_{j=0}^{N/2-1}f[2j]e^{-\frac{2i\pi}{N} (2j)k} +
+                \sum_{j=0}^{N/2-1}f[2j+1]e^{-\frac{2i\pi}{N} (2j+1)k},$$
+            </section>
+            <section>
+                Dont on déduit facilement:
+                $\sqrt{N} DFT(f)[k] =
+                \sum_{j=0}^{N/2-1}f[2j]e^{-\frac{2i\pi}{N/2} jk} +
+                e^{-\frac{2i\pi}{N}k}
+                \sum_{j=0}^{N/2-1}f[2j+1]e^{-\frac{2i\pi}{N/2} jk}.$
+            </section>
+            <section>
+
+            </section>
+
+
+
         <section>
             <h2>Crédit</h2>
             <p>Crédit à <b>Jez Swanson</b> pour les animations. Source : <a href="http://www.jezzamon.com/fourier/">https://github.com/Jezzamonn/fourier</a></p>

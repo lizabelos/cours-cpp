@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Arbre</title>
+    <style>
+        canvas {
+            display: block;
+            margin: auto;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="600"></canvas>
+    <input type="text" id="valeur">
+    <button id="push" onclick="arbre.push(document.getElementById('valeur').value);">Push</button>
+    <button id="pop" onclick="arbre.pop();">Pop</button>
+    <script>
+        class Noeud {
+            constructor(valeur) {
+                this.valeur = parseInt(valeur);
+                this.enfants = [];
+                this.position = {
+                    x: 0,
+                    y: 0,
+                };
+                this.newposition = {
+                    x: 0,
+                    y: 0
+                };
+            }
+
+            ajouterEnfant(valeur) {
+                const enfant = new Noeud(valeur);
+                this.enfants.push(enfant);
+            }
+
+            actualiserPositions(x, y, niveau) {
+                // Met à jour la position du nœud actuel
+                this.newposition.x = x;
+                this.newposition.y = y;
+
+                // Actualise la position des enfants récursivement
+                for (let i = 0; i < this.enfants.length; i++) {
+                    const enfant = this.enfants[i];
+                    const decalage = 400 / Math.pow(2, niveau + 1) * (i - (this.enfants.length - 1) / 2);
+                    enfant.actualiserPositions(x + decalage, y + 100, niveau + 1);
+                }
+
+            }
+
+            computeCenter() {
+                let minX = this.position.x;
+                let maxX = this.position.x;
+                let minY = this.position.y;
+                let maxY = this.position.y;
+                this.enfants.forEach(enfant => {
+                    const center = enfant.computeCenter();
+                    minX = Math.min(minX, center.minX);
+                    maxX = Math.max(maxX, center.maxX);
+                    minY = Math.min(minY, center.minY);
+                    maxY = Math.max(maxY, center.maxY);
+                });
+                return {
+                    minX: minX,
+                    maxX: maxX,
+                    minY: minY,
+                    maxY: maxY
+                };
+            }
+
+            afficher(canvas, ctx, shiftX, shiftY) {
+
+                const largeurNoeud = 40;
+                const hauteurNoeud = 40;
+
+                let x = this.position.x + shiftX;
+                let y = this.position.y + shiftY;
+
+                // Dessine les liens vers les enfants
+                this.enfants.forEach(enfant => {
+                    ctx.beginPath();
+                    ctx.moveTo(x, y);
+                    ctx.lineTo(enfant.position.x + shiftX, enfant.position.y + shiftY);
+                    ctx.stroke();
+                    ctx.closePath();
+                });
+
+                // Dessine le nœud avec un rectangle rempli et un contour noir
+                ctx.fillStyle = "white";
+                ctx.fillRect(x - largeurNoeud / 2, y - hauteurNoeud / 2, largeurNoeud, hauteurNoeud);
+                ctx.strokeStyle = "black";
+                ctx.strokeRect(x - largeurNoeud / 2, y - hauteurNoeud / 2, largeurNoeud, hauteurNoeud);
+
+                // Dessine la valeur du nœud
+                ctx.fillStyle = "black";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.fillText(this.valeur, x, y);
+
+                // Dessine les enfants récursivement
+                this.enfants.forEach(enfant => enfant.afficher(canvas, ctx, shiftX, shiftY));
+
+            }
+
+            swapWith(other) {
+                const temp = this.valeur;
+                this.valeur = other.valeur;
+                other.valeur = temp;
+
+               // this.newposition = this.position;
+               // other.newposition = other.position;
+
+                const thisPosition = this.position;
+                const otherPosition = other.position;
+
+                this.position = otherPosition;
+                other.position = thisPosition;
+            }
+
+            animate() {
+                this.position.x += (this.newposition.x - this.position.x) / 10;
+                this.position.y += (this.newposition.y - this.position.y) / 10;
+                this.enfants.forEach(enfant => enfant.animate());
+            }
+
+            numElements() {
+                let num = 1;
+                this.enfants.forEach(enfant => num += enfant.numElements());
+                return num;
+            }
+
+            push(valeur) {
+
+                let i = 1;
+                if (this.enfants.length < 2) {
+                    this.ajouterEnfant(valeur);
+                    i = this.enfants.length - 1;
+                }
+                else {
+                    if (this.enfants[0].numElements() < this.enfants[1].numElements()) {
+                        i = 0;
+                    }
+                    this.enfants[i].push(valeur);
+                }
+
+                if (this.valeur < this.enfants[i].valeur) {
+                    this.swapWith(this.enfants[i]);
+                }
+
+
+            }
+
+            pop() {
+
+                let i = 1;
+                if (this.enfants.length === 1) {
+                    i = 0;
+                } else if (this.enfants[0].valeur > this.enfants[1].valeur) {
+                    i = 0;
+                }
+                this.swapWith(this.enfants[i]);
+                if (this.enfants[i].enfants.length === 0) {
+                    this.enfants.splice(i, 1);
+                }
+                else {
+                    this.enfants[i].pop();
+                }
+            }
+
+        }
+
+        class Arbre {
+            constructor(valeur) {
+                this.racine = new Noeud(valeur);
+            }
+
+            actualiserPositions() {
+                this.racine.actualiserPositions(0, 0, 0);
+            }
+
+            ajouterEnfant(noeud, valeur) {
+                noeud.ajouterEnfant(valeur);
+            }
+
+            afficher() {
+                const canvas = document.getElementById("canvas");
+                const ctx = canvas.getContext("2d");
+                const largeurNoeud = 40;
+                const hauteurNoeud = 40;
+
+                const center = this.racine.computeCenter();
+
+                const shiftX = canvas.width / 2 - (center.maxX + center.minX) / 2;
+                const shiftY = canvas.height / 2 - (center.maxY + center.minY) / 2;
+
+                // Efface le canvas avant de redessiner l'arbre
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Dessine l'arbre
+                this.racine.afficher(canvas, ctx, shiftX, shiftY);
+            }
+
+            animate() {
+                this.racine.animate();
+            }
+
+            push(valeur) {
+                this.racine.push(valeur);
+                this.actualiserPositions()
+            }
+
+            pop() {
+                this.racine.pop();
+                this.actualiserPositions()
+            }
+        }
+
+        const arbre = new Arbre(10);
+        arbre.actualiserPositions();
+
+        // refresh the canvas every 30 milliseconds
+        setInterval(function () {
+            arbre.animate();
+            arbre.afficher();
+        }, 30);
+
+    </script>
+</body>
+</html>

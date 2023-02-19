@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <title>Arbre</title>
     <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+        }
+
         canvas {
             display: block;
             margin: auto;
@@ -14,18 +19,18 @@
 <body>
     Animation TP Fast Marching par Liza Belos
     <canvas id="canvas" width="800" height="600"></canvas>
-    <input type="text" id="valeur">
+    <input type="text" id="valeur" placeholder="Entrez une valeur ici">
     <button id="push" onclick="arbre.push(document.getElementById('valeur').value);">Push</button>
     <button id="pop" onclick="arbre.pop();">Pop</button>
     <br><br><br>
-    Cocher cette case pour activer l'animation pas à pas:
-    <input type="checkbox" id="animation" checked>
+    <label for="animation">Cocher cette case pour activer l'animation pas à pas:</label>
+    <input type="checkbox" id="animation">
     <br>
     Lorsque pas à pas est activé, cliquer sur le bouton suivant pour passer à l'étape suivante:
     <button id="next">Next</button>
     <script>
         async function sleep(msec) {
-            if (document.getElementById('animation').checked) {
+            if (!document.getElementById('animation').checked) {
                 await new Promise(resolve => setTimeout(resolve, msec));
             } else {
                 // wait for user to click next

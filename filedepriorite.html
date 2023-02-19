@@ -12,11 +12,27 @@
     </style>
 </head>
 <body>
+    Animation TP Fast Marching par Liza Belos
     <canvas id="canvas" width="800" height="600"></canvas>
     <input type="text" id="valeur">
     <button id="push" onclick="arbre.push(document.getElementById('valeur').value);">Push</button>
     <button id="pop" onclick="arbre.pop();">Pop</button>
+    <br><br><br>
+    Cocher cette case pour activer l'animation pas à pas:
+    <input type="checkbox" id="animation" checked>
+    <br>
+    Lorsque pas à pas est activé, cliquer sur le bouton suivant pour passer à l'étape suivante:
+    <button id="next">Next</button>
     <script>
+        async function sleep(msec) {
+            if (document.getElementById('animation').checked) {
+                await new Promise(resolve => setTimeout(resolve, msec));
+            } else {
+                // wait for user to click next
+                await new Promise(resolve => document.getElementById('next').onclick = resolve);
+            }
+        }
+
         class Noeud {
             constructor(valeur) {
                 this.valeur = parseInt(valeur);
@@ -131,28 +147,32 @@
                 return num;
             }
 
-            push(valeur) {
+            async push(valeur) {
 
                 let i = 1;
                 if (this.enfants.length < 2) {
                     this.ajouterEnfant(valeur);
                     i = this.enfants.length - 1;
+                    arbre.setDescription("Ajout de " + valeur);
+                    await sleep(1000);
                 }
                 else {
                     if (this.enfants[0].numElements() < this.enfants[1].numElements()) {
                         i = 0;
                     }
-                    this.enfants[i].push(valeur);
+                    await this.enfants[i].push(valeur);
                 }
 
                 if (this.valeur < this.enfants[i].valeur) {
+                    arbre.setDescription("Échange de " + this.valeur + " et de " + this.enfants[i].valeur);
                     this.swapWith(this.enfants[i]);
+                    await sleep(1000);
+                    arbre.setDescription("");
                 }
-
 
             }
 
-            pop() {
+            async pop() {
 
                 let i = 1;
                 if (this.enfants.length === 1) {
@@ -160,12 +180,18 @@
                 } else if (this.enfants[0].valeur > this.enfants[1].valeur) {
                     i = 0;
                 }
+
                 this.swapWith(this.enfants[i]);
+                arbre.setDescription("Échange de " + this.valeur + " et de " + this.enfants[i].valeur);
+                await sleep(1000);
+
                 if (this.enfants[i].enfants.length === 0) {
                     this.enfants.splice(i, 1);
+                    arbre.setDescription("Suppression de " + this.valeur);
+                    await sleep(1000);
                 }
                 else {
-                    this.enfants[i].pop();
+                    await this.enfants[i].pop();
                 }
             }
 
@@ -174,6 +200,11 @@
         class Arbre {
             constructor(valeur) {
                 this.racine = new Noeud(valeur);
+                this.description = "";
+            }
+
+            setDescription(description) {
+                this.description = description;
             }
 
             actualiserPositions() {
@@ -200,6 +231,12 @@
 
                 // Dessine l'arbre
                 this.racine.afficher(canvas, ctx, shiftX, shiftY);
+
+                // Dessine la description
+                ctx.fillStyle = "black";
+                ctx.textAlign = "left";
+                ctx.textBaseline = "top";
+                ctx.fillText(this.description, 10, 10);
             }
 
             animate() {
@@ -215,6 +252,7 @@
                 this.racine.pop();
                 this.actualiserPositions()
             }
+
         }
 
         const arbre = new Arbre(10);

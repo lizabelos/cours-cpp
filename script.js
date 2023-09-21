@@ -78,53 +78,59 @@ function replaceName() {
     document.body.innerHTML = document.body.innerHTML.replace(/\[name\]/g, name);
 }
 
+// wait for dom to be ready
+document.addEventListener('DOMContentLoaded', function() {
 
-// load all csses
-loadCsses([
-    '//cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/reset.min.css',
-    '//cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/reveal.min.css',
-    '//cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/theme/black.min.css',
-    'mycss.css',
-    '//cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/plugin/highlight/monokai.min.css'
-], function() {
+    // load all csses
+    loadCsses([
+        '//cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/reset.min.css',
+        '//cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/reveal.min.css',
+        '//cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/theme/black.min.css',
+        'mycss.css',
+        '//cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/plugin/highlight/monokai.min.css'
+    ], function() {
 
-});
 
-// load all scripts
-loadScripts([
-    //'http://www.jezzamon.com/fourier/main.bundle.js',
-    '//cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/reveal.min.js',
-    '//cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/plugin/notes/notes.min.js',
-    '//cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/plugin/markdown/markdown.min.js',
-    '//cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/plugin/highlight/highlight.min.js',
-    '//cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/plugin/math/math.min.js'
-], 'anonymous', 'no-referrer', function() {
 
-    console.log('Initializing Reveal.js');
-    revealpromise = Reveal.initialize({
-        hash: true,
-        slideNumber: true,
-        backgroundTransition: 'slide',
-        transition: 'fade',
-        katex: {
-            version: 'latest',
-            delimiters: [
-                {left: '$$', right: '$$', display: true},
-                {left: '$', right: '$', display: false},
-                {left: '\\(', right: '\\)', display: false},
-                {left: '\\[', right: '\\]', display: true}
-            ]
-        },
-        // Learn about plugins: https://revealjs.com/plugins/
-        plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX]
+        // load all scripts
+        loadScripts([
+            //'http://www.jezzamon.com/fourier/main.bundle.js',
+            '//cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/reveal.min.js',
+            '//cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/plugin/notes/notes.min.js',
+            '//cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/plugin/markdown/markdown.min.js',
+            '//cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/plugin/highlight/highlight.min.js',
+            '//cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/plugin/math/math.min.js'
+        ], 'anonymous', 'no-referrer', function() {
+
+            console.log('Initializing Reveal.js');
+            revealpromise = Reveal.initialize({
+                hash: true,
+                slideNumber: true,
+                backgroundTransition: 'slide',
+                transition: 'fade',
+                katex: {
+                    version: 'latest',
+                    delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '$', right: '$', display: false},
+                        {left: '\\(', right: '\\)', display: false},
+                        {left: '\\[', right: '\\]', display: true}
+                    ]
+                },
+                // Learn about plugins: https://revealjs.com/plugins/
+                plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX]
+            });
+
+            revealpromise.then(function() {
+                console.log('Reveal.js initialized!');
+                console.log('Replacing [name] with the name of the person specified in the URL');
+                //replaceName();
+                console.log('Reveal.js ready!');
+            });
+
+
+        });
+
     });
-
-    revealpromise.then(function() {
-        console.log('Reveal.js initialized!');
-        console.log('Replacing [name] with the name of the person specified in the URL');
-        replaceName();
-        console.log('Reveal.js ready!');
-    });
-
 
 });

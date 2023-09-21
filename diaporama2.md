@@ -143,9 +143,9 @@ cout << j << ',' << i << endl; // affiche 3,3
 Les tests servent à exécuter telle ou telle instruction en fonction de la valeur d'une ou de plusieurs variables. 
 
 Ils sont toujours entre parenthèses. 
-- Le "et" :  <a style="color: #2c40fb">```&&```</a>
-- Le "ou" :  <a style="color: #2c40fb">```||```</a>
-- La négation :  <a style="color: #2c40fb">```!```</a>
+- Le "et" :  <a style="color: #2c40fb">```&&```</a> (ou <a style="color: #2c40fb">```and```</a> moins utilisé)
+- Le "ou" :  <a style="color: #2c40fb">```||```</a> (ou <a style="color: #2c40fb">```or```</a> moins utilisé)
+- La négation :  <a style="color: #2c40fb">```!```</a> (ou <a style="color: #2c40fb">```not```</a> moins utilisé)
 - L'égalité :  <a style="color: #2c40fb">```==```</a> (attention <a style="color: #fb2c40">**2**</a> signes <a style="color: #2c40fb">```=```</a>)
 - La non-égalité :  <a style="color: #2c40fb">```!=```</a>
 - Les inégalités :  <a style="color: #2c40fb">```>```</a>,<a style="color: #2c40fb"> ```>=```</a>,<a style="color: #2c40fb">```<```</a>,<a style="color: #2c40fb"> ```<=```</a>
@@ -156,8 +156,9 @@ Ils sont toujours entre parenthèses.
 ### La condition if/else
 #### Premier exemple
 ```cpp [1-2|4-9]
-if (i==0) // i est-il nul?
+if (i==0) { // i est-il nul?
 	cout << "i est nul" << endl;
+}	
 	
 if (i>2)  // i est-il strictement plus grand que 2? 
 	j=3;
@@ -176,6 +177,19 @@ if (i!=3 || (j==2 && k!=3) || !(i>j && i>k)) {
 	cout << "Une première instruction" << endl;
 	cout << "Une deuxième instruction" << endl;
 }
+```
+
+
+### La condition if/else
+#### Erreur courante
+
+Attention à bien mettre les accolades !
+
+```cpp []
+if (i!=3 || (j==2 && k!=3) || !(i>j && i>k)) 
+	cout << "Une première instruction" << endl;
+	cout << "Une deuxième instruction" << endl;
+
 ```
 
 

@@ -1,6 +1,6 @@
 # Introduction au C++
 ## Cours n°8 <div style="font-size:50%;">(chap 9 du poly)</div>
-### Liza Belos
+### [name]
 #### Slides par  Mathis Petrovich et Liza Belos
 
 

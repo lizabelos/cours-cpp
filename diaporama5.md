@@ -1,6 +1,6 @@
 # Introduction au C++
 ## Cours n°5 <div style="font-size:50%;">(chap 6 du poly)</div>
-### Liza Belos
+### [name]
 #### Slides par  Mathis Petrovich et Liza Belos
 
 

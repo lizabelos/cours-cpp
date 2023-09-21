@@ -1,6 +1,6 @@
 # Algorithmique et Structure de Données
 ## Cours 1
-### Liza Belos
+### [name]
 
 
 

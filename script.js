@@ -74,8 +74,11 @@ function replaceName() {
     if (url.searchParams.has('firstname') && url.searchParams.has('lastname')) {
         name = url.searchParams.get('firstname') + " " + url.searchParams.get('lastname');
     }
-    // find [name] in the whole document and replace it with the name
-    document.body.innerHTML = document.body.innerHTML.replace(/\[name\]/g, name);
+    // find .myname and fill it with the name
+    var myname = document.getElementsByClassName('myname');
+    for (var i = 0; i < myname.length; i++) {
+        myname[i].innerHTML = name;
+    }
 }
 
 // wait for dom to be ready
@@ -124,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
             revealpromise.then(function() {
                 console.log('Reveal.js initialized!');
                 console.log('Replacing [name] with the name of the person specified in the URL');
-                //replaceName();
+                replaceName();
                 console.log('Reveal.js ready!');
             });
 

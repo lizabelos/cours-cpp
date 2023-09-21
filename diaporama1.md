@@ -1,6 +1,6 @@
 # Introduction au C++
 ## Cours 1
-### 2021-2022
+<span class="myname"></span>
 #### Slides par Mathis Petrovich et Liza Belos
 
 

@@ -1,5 +1,5 @@
 # Qt Creator
-#### Thomas Belos
+#### Liza Belos
 
 
 

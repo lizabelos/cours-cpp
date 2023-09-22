@@ -15,3 +15,5 @@ Diapositives par Mathis Petrovich et Liza Belos.
 - [Cours 9 et 10](/cours-cpp/cours9.html) Chapitre 10: Constructeurs et Destructeurs
 - [Cours 11.1](/cours-cpp/cours11.html) Chapitre 11: Chaînes de caractères, fichiers
 - [Cours 11.2](/cours-cpp/cours12.html) Chapitre 12: Fonctions et classes paramétrées (templates)
+
+- [Qt Creator](/cours-cpp/qtcreator.html) Qt Creator

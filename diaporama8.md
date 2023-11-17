@@ -499,4 +499,4 @@ Les méthodes <a style="color: #2c40fb">get()</a> et <a style="color: #2c40fb">s
 http://imagine.enpc.fr/~monasse/Info/
 
 ### Fiche de référence du cours
-Poly : <a style="colo#fb2c40">page 133</a>
+Poly : <a style="color: #fb2c40">page 133</a>

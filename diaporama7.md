@@ -182,7 +182,7 @@ double ∗A = new double[6][7]; // NON !! Ne fonctione pas !!
 
 
 
-## Stocker dans un tableau 1D!
+## Stocker dans un tableau 1D !
 ```cpp
 int m, n;
 double ∗A = new double[m∗n];
@@ -201,7 +201,7 @@ delete[] y;
 
 
 
-## Pourquoi ça marche?
+## Pourquoi ça marche ?
 ### <a style="color: #fb2c40">``int``</a> <a style="color: #2c40fb">``t[n]``</a>
 - Définit une variable locale, 
 - => donc de la mémoire dans la pile
@@ -209,14 +209,14 @@ delete[] y;
 
 
 
-## Pourquoi ça marche?
+## Pourquoi ça marche ?
 ### <a style="color: #fb2c40">``int``</a> *<a style="color: #2c40fb">``t``</a>
 - Définit une variable de type <a style="color: #40fb2c">pointeur</a> d'int
 - t peut mémoriser l’adresse d’une zone mémoire contenant des int
 
 
 
-## Pourquoi ça marche?
+## Pourquoi ça marche ?
 ### <a style="color: #fb2c40">``new int``</a><a style="color: #2c40fb">``[n]``</a>
 - Alloue dans le tas une zone mémoire pouvant stocker n int 
 - et renvoie l’adresse de cette zone. 
@@ -228,14 +228,14 @@ int *t = new int[n];
 
 
 
-## Pourquoi ça marche?
+## Pourquoi ça marche ?
 ### <a style="color: #fb2c40">``delete[]``</a> <a style="color: #2c40fb">``t``</a>
 - delete[] t libère dans le tas la mémoire 
 - correspondant à l’adresse mémorisée dans t
 
 
 
-## Pourquoi ça marche?
+## Pourquoi ça marche ?
 ### <a style="color: #fb2c40">``delete[]``</a> <a style="color: #2c40fb">``t``</a>
 - Si t est de taille fixe t[i]
   - ieme element du tableau
@@ -246,7 +246,7 @@ int *t = new int[n];
 
 
 
-## Pourquoi ça marche?
+## Pourquoi ça marche ?
 ### Taille fixe
 - La syntaxe "t" tout court 
   - Adresse (dans la pile) à laquelle le tableau est mémorisé. 
@@ -294,7 +294,7 @@ for (int i=0;i<n;i++)
 
 
 ## Erreurs classiques
-### Oublier de désallouer:
+### Oublier de désallouer :
 ```cpp
 void f(int n) {
     int *t=new int[n];
@@ -306,7 +306,7 @@ void f(int n) {
 
 
 ## Erreurs classiques
-### Ne pas désallouer ce qu'il faut:
+### Ne pas désallouer ce qu'il faut :
 ```cpp
 int* t=new int[n];
 int* s=new int[n];
@@ -326,7 +326,7 @@ delete[] s;
 
 
 ## Quand libérer
-### Le plus tôt possible!
+### Le plus tôt possible !
 ```cpp
 void f() {
     int t[10];
@@ -356,7 +356,7 @@ int* alloue(int n) {
 
 
 ## Pointeurs et fonctions
-### Passage par valeur!
+### Passage par valeur !
 ```cpp
 void f(int* t, int n) {
      ....
@@ -447,7 +447,7 @@ cout << a[2] << endl; // 6
 
 
 
-## Structures/ allocation dynamique
+## Structures / allocation dynamique
 ### Implémentation <a style="color: #2c40fb">des matrices</a>
 Plus besoin de passer systématiquement le tableau et ses dimensions.
 
@@ -482,15 +482,15 @@ void detruit(Matrice M) {
     delete[] M.t;
 }
 
-double get(Matrice M,int i,int j) {
+double get(Matrice M, int i, int j) {
 	return M.t[i+M.m*j];
 }
 
-void set(Matrice M,int i,int j,double x) {
+void set(Matrice& M, int i, int j, double x) {
 	M.t[i+M.m*j]=x;
 }
 
-Matrice produit(Matrice A,Matrice B) {
+Matrice produit(Matrice A, Matrice B) {
     if (A.n!=B.m) {
         cout << "Erreur!" << endl;
         exit(1);

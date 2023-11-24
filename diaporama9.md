@@ -788,69 +788,18 @@ v=v;
 
 
 ### Solution finale fonctionnelle
-<div style="font-size: 70%">
-
-```cpp [4-22|24-39|41-55|57-63]
-#include <iostream>
-using namespace std;
-
-class vect {
-    // champs
-    int n;
-    double *t;
-    // fonctions privées
-    void alloc(int N);
-    void kill();
-    void copy(const vect& v);
-public:
-    // constructeurs
-    vect();
-    vect(const vect& v);
-    // destructeur
-    ~vect();
-    // affectation
-    const vect& operator=(const vect& v);
-    // constructeurs supplémentaires
-    vect(int N);
-};
-
-void vect::alloc(int N) {
-    n=N;
-    if (n!=0)
-        t=new double[n];
-}
-
-void vect::kill() {
-    if (n!=0)
-        delete[] t;
-}
-
-void vect::copy(const vect& v) {
-    alloc(v.n);
-    for (int i=0;i<n;i++) // OK même si n==0
-        t[i]=v.t[i];
-}
-
-vect::vect() {
-    alloc(0);
-}
-
-vect::vect(int N) {
-    alloc(N);
-}
-
-vect::vect(const vect& v) {
-    copy(v);
-}
-
-vect::~vect() {
-    kill();
-}
-  
-const vect& vect::operator=(const vect& v) {
-    if (this!=&v) { // instruction pour savoir si c'est pas le même objet
-        kill();
-        copy(v);
+```cpp
+const Vect& Vect::operator=(const Vect& v) {
+    bool del = (n!=0 and n!=v.n);
+    if (del)
+        delete[] t; // On se desalloue si necessaire
+    n=v.n;
+    if (n!=0) {
+        if (del)
+            t=new double[n]; // Reallocation
+        // copie
+        for (int i=0;i<n;i++)
+            t[i]=v.t[i];
     }
     return v;
 }

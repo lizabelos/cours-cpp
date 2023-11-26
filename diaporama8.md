@@ -39,12 +39,12 @@ Les données possèdent des fonctionnalités.
 
 
 ## Attention
-Ne pas abusé des objets surtout en tant que débutant:
+Ne pas abuser des objets surtout en tant que débutant :
 
 ### <a style="color: #fb2c40">Dangers</a>
 - Instructions et données ne sont pas toujours liées
 - Mal penser l’organisation des données ou des instructions en objets
-- Conseil: si c'est trop compliqué pour vous => abandonnez les objets
+- Conseil : si c'est trop compliqué pour vous => abandonnez les objets
 
 
 
@@ -390,7 +390,7 @@ for (int i=0;i<6;i++)
 
 
 
-### Solution: le mot clef <a style="color: #2c40fb">class</a>
+### Solution : le mot clef <a style="color: #2c40fb">class</a>
 <div class="col" style="font-size: 70%; line-height: 600%;">
 
 ```cpp [1-8|9-13|14-17|18-21|23-30]
@@ -456,7 +456,7 @@ public:
     Matrice operator*(Matrice B);
 };
 ```
-Ici m, n et t sont _protégées_.
+Ici `m`, `n` et `t` sont _protégées_.
 
 
 

@@ -33,18 +33,18 @@ point b={2,3};
 
 #### Avec les objets
 ```cpp
-class point {
+class Point {
   int x,y;
 public:
   void get(int&X, int&Y);
   void set(int X,int Y);
 };
 ...
-point a;
+Point a;
 a.set(2,3);
 a.get(i,j);
 // Impossible
-point b={2,3};
+Point b={2,3};
 ```
 
 </div>
@@ -62,25 +62,25 @@ point b={2,3};
 <div style="font-size: 90%">
 
 ```cpp [1-6|8-13|17-21]
-class point {
+class Point {
 	int x,y;
 public:
 	// déclaration du constructeur
-	point(int X,int Y);
+	Point(int X,int Y);
 };
 
 // définition du constructeur
 // pas de type de retour
-point::point(int X,int Y) {
+Point::Point(int X,int Y) {
 	x=X;
 	y=Y;
 }
 
 ...
 
-point a(1,2); // OK! Valeurs initiales
+Point a(1,2); // OK! Valeurs initiales
 // On ne fait pas comme ça pour changer les champs de a.
-a.point(3,4); // ERREUR! 
+a.Point(3,4); // ERREUR! 
 // Mais plutôt comme ça.
 a.set(3,4);   // OK!
 ```
@@ -107,51 +107,51 @@ Affiche "hello"
 
 ## Plusieurs constructeurs
 ```cpp [1-6|8-11|13-15|18-19]
-class point {
+class Point {
   int x,y;
 public:
-  point(int X,int Y);
-  point(int V);
+  Point(int X,int Y);
+  Point(int V);
 };
 
-point::point(int X,int Y) {
+Point::Point(int X,int Y) {
   x=X;
   y=Y;
 }
 
-point::point(int V) {
+Point::Point(int V) {
   x=y=V;
 }
 
 ...
-  point a(2,3); // construit avec point(X,Y)
-  point b(4);   // construit avec point(V)
+  Point a(2,3); // construit avec Point(X,Y)
+  Point b(4);   // construit avec Point(V)
 ```
 
 
 
 ### Attention au constructeur vide!
 ```cpp [|20]
-class point {
+class Point {
   int x,y;
 public:
-  point(int X,int Y);
-  point(int V);
+  Point(int X,int Y);
+  Point(int V);
 };
 
-point::point(int X,int Y) {
+Point::Point(int X,int Y) {
   x=X;
   y=Y;
 }
 
-point::point(int V) {
+Point::Point(int V) {
   x=y=V;
 }
 
 ...
-  point a(2,3); // construit avec point(X,Y)
-  point b(4);   // construit avec point(V)
-  point c; // ne marche plus!
+  Point a(2,3); // construit avec Point(X,Y)
+  Point b(4);   // construit avec Point(V)
+  Point c; // ne marche plus!
 ```
 
 
@@ -167,15 +167,15 @@ Il existe un constructeur vide par défaut.
 <a style="color: #fb2c40">Le constructeur vide n'existe plus</a>, sauf si on le redéfinit soi-même.
 
 ```cpp
-class point {
+class Point {
   int x,y;
 public:
-  point(int X,int Y);
-  point(int V);
-  point();
+  Point(int X,int Y);
+  Point(int V);
+  Point();
 };
 ...
-point::point() {
+Point::Point() {
 ...
 }
 ```
@@ -186,13 +186,13 @@ point::point() {
 ```cpp
 // Construit 3 fois avec le constructeur vide
 // sur chacun des éléments du tableau
-point t[3];
+Point t[3];
 
 // Idem, n fois
-point *s = new point[n];
+Point *s = new Point[n];
 
 // ERREUR et HORREUR !! Ceci est impossible !!
-point *u = new point(1,2)[n];
+Point *u = new Point(1,2)[n];
 ```
 Impossible de spécifier globalement quel constructeur est appelé pour les éléments d’un tableau. 
 
@@ -205,7 +205,7 @@ Impossible de spécifier globalement quel constructeur est appelé pour les él�
 ## Tableaux d'objets
 ### Il faudra donc écrire:
 ```cpp
-point* u=new point[n];
+Point* u=new Point[n];
 for (int i=0;i<n;i++)
 	u[i].set(1,2);
 ```
@@ -213,7 +213,7 @@ Ce qui n'est pas vraiment identique
 
 ### Syntaxe possible pour taille fixe
 ```cpp
-point t[3]={point(1,2),point(2,3),point(3,4)};
+Point t[3]={Point(1,2),Point(2,3),Point(3,4)};
 ```
 
 
@@ -232,9 +232,9 @@ On peut construire un objet sans qu'il soit rangé dans une variable.
 <div class="col">
 
 ```cpp
-point g() {
+Point g() {
 // definit l'object
-  point e(1,2);
+  Point e(1,2);
   return e;
 }
 ```
@@ -243,10 +243,10 @@ point g() {
 <div class="col">
 
 ```cpp
-point g() {
+Point g() {
 // retourne directement 
 // l'objet temporaire
-  return point(1,2);
+  return Point(1,2);
 }
 ```
 </div>
@@ -257,14 +257,14 @@ point g() {
 
 
 ## Objets temporaires
-### Attention erreur <a style="color: #fb2c40">très fréquente</a>
-Ne pas faire :
+### Mauvaise habitude <a style="color: #fb2c40">très fréquente</a>
+Éviter :
 ```cpp
-point p=point(1,2); // NON!!!!!!!
+Point p = Point(1,2); // NON !
 ```
-Mais plutôt :
+Préférer :
 ```cpp
-point p(1,2);       // OUI!
+Point p(1,2);       // OUI !
 ```
 
 
@@ -272,22 +272,22 @@ point p(1,2);       // OUI!
 ## Objets temporaires
 ### Exemple sans
 ```cpp
-point point::operator+(point b) {
-  point c(x+b.x,y+b.y);
+Point Point::operator+(Point b) {
+  Point c(x+b.x,y+b.y);
   return c;
 }
 ...
-  point a(1,2),b(2,3);
+  Point a(1,2),b(2,3);
   c=a+f(b);
 ```
 
 ### Exemple avec
 ```cpp
-point point::operator+(point b) {
-  return point(x+b.x,y+b.y);
+Point Point::operator+(Point b) {
+  return Point(x+b.x,y+b.y);
 }
 ...
-  c=point(1,2)+f(point(2,3));
+  c = Point(1,2) + f(Point(2,3));
 ```
 
 
@@ -296,22 +296,22 @@ point point::operator+(point b) {
 <div style="font-size: 70%">
 
 ```cpp
-const int N=1000;
-class vecteur {
+const int N = 1000;
+class Vecteur {
   double t[N];
   ...
 };
-class matrice {
+class Matrice {
   double t[N][N];
   ...
 };
 // résout AX=B
-void solve(matrice A,vecteur B,vecteur& X) {
+void solve(Matrice A, Vecteur B, Vecteur& X) {
    ...
 }
    ...
-   vecteur b,x;
-   matrice a;
+   Vecteur b,x;
+   Matrice a;
    ...
    solve(a,b,x); // résout ax=b
 ```
@@ -327,7 +327,7 @@ Lorsqu'on passe un objet en paramètre à une fonction, il est recopié.
 ### Première idée
 Passer les arguments par références
 ```cpp
-void solve(matrice& A,vecteur& B,vecteur& X) {
+void solve(Matrice& A, Vecteur& B, Vecteur& X) {
 ...
 }
 ```
@@ -341,7 +341,7 @@ A et b peuvent être modifié! Et ça peut être génant..
 
 ## Référence constantes
 ```cpp
-void solve(const matrice& A,const vecteur& B,vecteur& X) {
+void solve(const Matrice& A, const Vecteur& B, Vecteur& X) {
 ...
 }
 ```
@@ -369,7 +369,7 @@ Remplacer "obj o" par "const obj& o" est utile pour <a style="color: #2c40fb">ac
 
 ## Méthodes constantes
 ```cpp
-class point {
+class Point {
     int x, y;
 public:
     void set(int X, int Y);
@@ -377,7 +377,7 @@ public:
     int getY() const;
 };
 
-int point::getX() const {
+int Point::getX() const {
     return x;
 }
 ```
@@ -397,27 +397,27 @@ Une méthode constante peut lire les membres, mais ne peut pas les modifiers.
 <div style="font-size: 70%">
 
 ```cpp
-class obj {
+class Obj {
 public:
-    obj(); // constructeur
-    ~obj(); // destructeur 
+    Obj(); // constructeur
+    ~Obj(); // destructeur 
 };
 // constructeur
-obj::obj() {
+Obj::Obj() {
     cout << "Bonjour !" << endl;
 }
 // destructeur 
-obj::~obj() {
+Obj::~Obj() {
     cout << "Au revoir !" << endl;
 }
 
 void f() {
     // affiche "Bonjour !"
-    obj monobj;
+    Obj monobj;
 
     // ...
 
-    // A la fin de f(), obj est détruit.
+    // A la fin de f(), Obj est détruit.
     // Son destructeur est appelé,
     // et affiche "Au revoir !"
 }
@@ -449,7 +449,7 @@ Appel pour <a style="color: #2c40fb">tous</a> les éléments du tableau:
 
 ```cpp []
 if (a==b) {
-	obj t[10];
+	Obj t[10];
 	...
 }
 ```
@@ -461,9 +461,9 @@ Pour l'allocation dynamique:
 
 ```cpp []
 if (a==b) {
-	obj* t=new obj[n]; // n appels à obj()
+	Obj* t=new Obj[n]; // n appels à Obj()
 	...
-	delete[] t;        // n appels à ~obj();
+	delete[] t;        // n appels à ~Obj();
 }
 ```
 
@@ -473,25 +473,25 @@ if (a==b) {
 <div style="font-size: 80%">
 
 ```cpp []
-class obj {
+class Obj {
     char *tab;
     int tabsize;
 public:
-    obj(int n);
-    ~obj();
+    Obj(int n);
+    ~Obj();
 };
 
-obj::obj(int n) {
+Obj::Obj(int n) {
     tab = new char[n]
     tabsize = n;
 }
 
-obj::~obj() {
+Obj::~Obj() {
     delete[] tab;
 }
 
 int main() {
-    obj monobj(10);
+    Obj monobj(10);
     // ...
     return 0;
 }
@@ -503,13 +503,13 @@ int main() {
 ## Constructeur de copie
 ### Déclaration
 ```cpp
-obj::obj(const obj& o);
+Obj::Obj(const Obj& o);
 ```
 ### Utilisation
 ```cpp
-obj a;
-obj b(a); // b à partir de a
-obj c=a;  // c à partir de a, synonyme de c(a)}
+Obj a;
+Obj b(a); // b à partir de a
+Obj c=a;  // c à partir de a, synonyme de c(a)}
 ```
 Et aussi pour construire les paramètres des fonctions et leur valeur de retour.
 
@@ -518,7 +518,7 @@ Et aussi pour construire les paramètres des fonctions et leur valeur de retour.
 ## Constructeur de copie
 ### Ne pas confondre avec
 ```cpp
-obj a,b;
+Obj a,b;
 b=a; // ceci n'est pas un constructeur!
 // c'est une affectation
 ```
@@ -534,26 +534,26 @@ Lorsqu’il n’est pas programmé explicitement
 <div style="font-size: 70%">
 
 ```cpp []
-class obj {
+class Obj {
     char *tab;
     int tabsize;
 public:
-    obj(int n);
-    ~obj();
+    Obj(int n);
+    ~Obj();
 };
 
-obj::obj(int n) {
+Obj::Obj(int n) {
     tab = new char[n]
     tabsize = n;
 }
 
-obj::~obj() {
+Obj::~Obj() {
     delete[] tab;
 }
 
 int main() {
-    obj monobj(10);
-    obj copiedeobj = monobj; // constructeur de copie par défaut
+    Obj monobj(10);
+    Obj copiedeobj = monobj; // constructeur de copie par défaut
     return 0; // tab est détruit 2 fois !!
 }
 ```
@@ -565,21 +565,21 @@ int main() {
 <div style="font-size: 70%">
 
 ```cpp [1-8|15-21|27-31]
-class obj {
+class Obj {
     char *tab;
     int tabsize;
 public:
-    obj(int n);
-    obj(obj &o);
-    ~obj();
+    Obj(int n);
+    Obj(Obj &o);
+    ~Obj();
 }
 
-obj::obj(int n) {
+Obj::Obj(int n) {
     tab = new char[n]
     tabsize = n;
 }
 
-obj::obj(const obj &o) {
+Obj::Obj(const Obj &o) {
     tab = new char[o.tabsize];
     tabsize = o.tabsize;
     for (int i = 0; i < tabsize; i++) {
@@ -587,13 +587,13 @@ obj::obj(const obj &o) {
     }
 }
 
-obj::~obj() {
+Obj::~Obj() {
     delete[] tab;
 }
 
 int main() {
-    obj monobj(10);
-    obj copiedeobj = monobj; // Appel le constructeur de copie
+    Obj monobj(10);
+    Obj copiedeobj = monobj; // Appel le constructeur de copie
     return 0; // OK !!
 }
 ```
@@ -605,12 +605,12 @@ int main() {
 ## Opérateur d'affection
 ### Déclaration
 ```cpp
-void obj::operator=(const obj& o);
+void Obj::operator=(const Obj& o);
 ```
 
 ### Utilisation
 ```cpp
-obj a,b;
+Obj a,b;
 a=b; // se lit a.operator=(b)
 ```
 
@@ -624,7 +624,7 @@ Recopie <a style="color: #2c40fb">tous les champs</a> de b dans a
 Retourner l'objet à la fin
 ```cpp
 // Déclaration (dans le class { };)
-obj obj::operator=(const obj& o);
+Obj Obj::operator=(const Obj& o);
 
 // Exemple
 a=b=c; // se lit a=(b=c);
@@ -632,7 +632,7 @@ a=b=c; // se lit a=(b=c);
 
 #### Encore mieux (ne copie pas l'objet dans le return)
 ```cpp
-const obj& obj::operator=(const obj&o);
+const Obj& Obj::operator=(const Obj&o);
 ```
 
 
@@ -652,7 +652,7 @@ le comportement par défaut <a style="color: #fb2c40">ne convient pas</a>.
 #include <iostream>
 using namespace std;
 
-class vect {
+class Vect {
     int n;
     double *t;
 public:
@@ -660,18 +660,18 @@ public:
     void libere();
 };
 
-void vect::alloue(int N) {
+void Vect::alloue(int N) {
     n=N;
     t=new double[n];
 }
 
-void vect::libere() {
+void Vect::libere() {
     delete[] t;
 }
 
 int main()
 {
-    vect v;
+    Vect v;
     v.alloue(10);
     ...
     v.libere();
@@ -689,26 +689,26 @@ int main()
 #include <iostream>
 using namespace std;
 
-class vect {
+class Vect {
     int n;
     double *t;
 public:
-    vect(int N);
-    ~vect();
+    Vect(int N);
+    ~Vect();
 };
 
-vect::vect(int N) {
+Vect::Vect(int N) {
     n=N;
     t=new double[n];
 }
 
-vect::~vect() {
+Vect::~Vect() {
     delete[] t;
 }
 
 int main()
 {
-    vect v(10);
+    Vect v(10);
     ... 
     return 0;
 }
@@ -720,7 +720,7 @@ int main()
 ### Problème simple
 Si on rajoute un constructeur vide:
 ```cpp
-vect::vect() {
+Vect::Vect() {
 }
 ```
 <span class="fragment">
@@ -729,11 +729,11 @@ Il ne faut plus <a style="color: #fb2c40">désallouer t</a> (qui est vide!)
 
 #### <a style="color: #2c40fb">Solution</a>
 ```cpp
-vect::vect() {
+Vect::Vect() {
 	n=0;
 }
 
-vect::~vect() {
+Vect::~Vect() {
     if (n!=0)
        delete[] t;
 }
@@ -748,7 +748,7 @@ Ce programme ne marche pas:
 ```cpp
 int main()
 {
-  vect v(10),w(10);
+  Vect v(10),w(10);
   w=v;
   return 0;
 }
@@ -766,7 +766,7 @@ L'affectation <a style="color: #fb2c40">recopie</a> les champs de v dans w
 
 ### Solution: operateur d'affecation
 ```cpp []
-const vect& vect::operator=(const vect& v) {
+const Vect& Vect::operator=(const Vect& v) {
     if (n!=0)
         delete[] t; // On se desalloue si necessaire
     n=v.n;
@@ -781,7 +781,7 @@ const vect& vect::operator=(const vect& v) {
 ### Problème
 Ne marche pas avec l'instruction:
 ```cpp
-vect v(10);
+Vect v(10);
 v=v;
 ```
 
@@ -794,60 +794,60 @@ v=v;
 #include <iostream>
 using namespace std;
 
-class vect {
+class Vect {
     // champs
     int n;
     double *t;
     // fonctions privées
     void alloc(int N);
     void kill();
-    void copy(const vect& v);
+    void copy(const Vect& v);
 public:
     // constructeurs
-    vect();
-    vect(const vect& v);
+    Vect();
+    Vect(const Vect& v);
     // destructeur
-    ~vect();
+    ~Vect();
     // affectation
-    const vect& operator=(const vect& v);
+    const Vect& operator=(const Vect& v);
     // constructeurs supplémentaires
-    vect(int N);
+    Vect(int N);
 };
 
-void vect::alloc(int N) {
+void Vect::alloc(int N) {
     n=N;
     if (n!=0)
         t=new double[n];
 }
 
-void vect::kill() {
+void Vect::kill() {
     if (n!=0)
         delete[] t;
 }
 
-void vect::copy(const vect& v) {
+void Vect::copy(const Vect& v) {
     alloc(v.n);
     for (int i=0;i<n;i++) // OK même si n==0
         t[i]=v.t[i];
 }
 
-vect::vect() {
+Vect::Vect() {
     alloc(0);
 }
 
-vect::vect(int N) {
+Vect::Vect(int N) {
     alloc(N);
 }
 
-vect::vect(const vect& v) {
+Vect::Vect(const Vect& v) {
     copy(v);
 }
 
-vect::~vect() {
+Vect::~Vect() {
     kill();
 }
   
-const vect& vect::operator=(const vect& v) {
+const Vect& Vect::operator=(const Vect& v) {
     if (this!=&v) { // instruction pour savoir si c'est pas le même objet
         kill();
         copy(v);

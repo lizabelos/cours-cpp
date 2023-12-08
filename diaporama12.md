@@ -58,7 +58,7 @@ void echange(T& a,T& b) {
 // Maximum de deux variables 
 // (a condition que operator>() existe pour le type T)
 template <typename T>
-T maxi(T a,T b) {
+T maxi(const T& a, const T& b) {
     return (a>b)?a:b;
 }
 ```
@@ -73,7 +73,7 @@ T maxi(T a,T b) {
 // dans e2 l'element de tab2 de meme indice
 // Renvoie false si non trouvé
 template <typename T1,typename T2>
-bool cherche(T1 e1,T2& e2,const T1* tab1,const T2* tab2, int n) {
+bool cherche(const T1& e1, T2& e2, const T1* tab1, const T2* tab2, int n) {
     for (int i=0;i<n;i++) 
         if (tab1[i]==e1) {
             e2=tab2[i];
@@ -281,7 +281,7 @@ public:
 
 ```cpp []
 template <typename T, int N>
-T somme(nuplet<T,N> u) {
+T somme(const nuplet<T,N>& u) {
     T s=u(0);
     for (int i=1;i<N;i++)
         s+=u(i);
@@ -424,19 +424,19 @@ int main()
 
 ## Valeur conditionnelle
 ```cpp
-(test)?val1:val2
+(test) ? val1 : val2
 ```
-vaut "val1" si "test" est vrai et "val2" sinon.
+vaut ``val1`` si ``test`` est vrai et ``val2`` sinon.
 
 ### Exemple d'utilisation
 ```cpp
-if (x>y)
-   maxi=x;
+if (x > y)
+   maxi = x;
 else
-   maxi=y;
+   maxi = y;
    
 // peut être remplacé par:
-maxi=(x>y)?x:y;
+maxi = (x > y) ? x : y;
 ```
 
 Il ne faut pas abuser de cette construction sous peine de programme illisible!

@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <meta name="description" content="Chapitre 2 d'Algorithmique et Structures de Données">
+<meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Algorithmes C++ - Chapitre 2 : Diviser pour régner (FFT)</title>
+
+
+    <!-- Multi column -->
+    <style>
+        .container{
+            display: flex;
+        }
+        .col{
+            flex: 1;
+        }
+
+        .mytable {
+            border: 1px solid white !important;
+        }
+
+        .mytable tr {
+            border: 1px solid white !important;
+        }
+
+        .mytable td {
+            border: 1px solid white !important;
+        }
+
+        .eductnetlist li {
+            display: block;
+        }
+
+        .eductnetlist img {
+            border: 0px solid transparent !important;
+            display: inline-block !important;
+            vertical-align: middle !important;
+            background-color: transparent !important;
+            height: 48px !important;
+            width: auto !important;
+            margin: 0px 16px !important;
+        }
+
+        .instancename {
+            display: table-cell;
+            height: 64px !important;
+            width: auto !important;
+            color: white !important;
+        }
+
+        .eductnetlist a:hover .instancename {
+            color: #4d86ff !important;
+        }
+
+        .courselink {
+            display: block;
+            padding: 32px 16px;
+            font-size: 50%;
+        }
+    </style>
+
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h1>Algorithmique et Structures de Données</h1>
+            <h2>Chapitre 2<br>Diviser pour régner</h2>
+        </section>
+            <section>
+                <h3>Complexité de QuickSort</h3>
+            </section>
+            <section>
+                <span>
+                    Soit $N$ la taille du tableau à triller. Alors, le positionnement du pivot nécessite un parcours du tableau, donc $N - 1$ comparaisons.
+                </span><br><br>
+                <span class="fragment">
+                    Si nous notons $C_n$ la complexité et que nous nous retrouvons avec un pivot en position $i$, nous avons la relation de récurrence :<br>
+                    $C_n=(N-1)+C_i+C_{N-i-1}$
+                </span>
+            </section>
+            <section>
+                <span>
+                    En moyenne, $C_n=N+2C_{N/2}$.
+                </span><br><br>
+                <span class="fragment">
+                    En utilisant la relation de récurrent pour $C_{N/2}$, nous obtenons : <br>
+                    $C_n=N+2(N/2+2C_{N/4})=2N+4C_{N/4}$
+                </span>
+            </section>
+            <section>
+                 <span>
+                    Puis : $C_n=3N+8C_{N/8}$<br>
+                    etc.. etc..
+                </span><br><br>
+                <span class="fragment">
+                    Le processus s'arrête lorsque l'indice de droite ($N/8$) devient 1. Alors : <br>
+                    $C_n=(log\,N)N+NC_1$
+                </span><br><br>
+                <span class="fragment" style="border: 1px solid red;">
+                    Conclusion : $C_n = O(N\,log\,N)$ !
+                </span>
+            </section>
+            <section>
+                <h3>Transformée de Fourier</h3>
+            </section>
+            <section>
+                <h4>Voici une onde...</h4>
+                <canvas id="combo-sine-wave" class="sketch" width="500" height="300"></canvas><br>
+                <span class="fragment">En 1D, cela peut représenter un son. En 2D, une image...</span><br>
+                <span class="fragment"><b>Problème : </b> Comment traiter et stocker efficacement cette onde ?</span>
+            </section>
+            <section>
+                <h4>Solution naïve, traiter et stocker l'onde tels quelle</h4>
+            </section>
+            <section>
+                <h4>Notre onde peut-être décomposée en plusieurs ondes sinusoïdales...</h4>
+                <canvas id="combo-sine-wave-split" class="sketch" width="500" height="500"></canvas>
+            </section>
+            <section>
+                <h4>Voici une onde carré...</h4>
+                <canvas id="square-wave" class="sketch" width="500" height="300"></canvas>
+            </section>
+            <section>
+                <h4>De même, celle-ci peut-être approximée en plusieurs onde sinusoïdale...</h4>
+                <canvas id="square-wave-split" class="sketch" width="500" height="500"></canvas>
+            </section>
+            <section>
+                <h4>Il faut beaucoup d'iterations pour obtenir une bonne reconstruction</h4>
+                <canvas id="square-wave-build-up" class="sketch" width="500" height="500"></canvas>
+                <p><input id="square-wave-build-up-slider" type="range" min="0" max="1" value="0" step="any"></p>
+            </section>
+            <section>
+                <h3>Transformée de Fourier Discrète</h3>
+            </section>
+            <section>
+                <h3>fft.cpp</h3>
+                <pre>
+                    <code>
+std::complex&#60;float&#62; dft(const std::complex&#60;float>&#62; f[], int n, int k, float s);
+                    </code>
+                </pre>
+                <span>$DFT(f)[k] = \frac{1}{\sqrt{N}}\sum_{j=0}^{N-1}f[j]e^{-\frac{2i\pi}{N} jk}.$</span><br>
+                <span>pour un $k$ donné</span>
+
+            </section>
+            <section>
+                <h3>test_fft.cpp</h3>
+                <span>$DFT(f)[k] = \frac{1}{\sqrt{N}}\sum_{j=0}^{N-1}f[j]e^{-\frac{2i\pi}{N} jk}.$</span><br>
+                <span>pour $\qquad k = 0,\dots,n-1.$</span>
+            </section>
+            <section>
+                <h3>Transformée de Fourier Rapide</h3>
+                <h4>Divier pour régner</h4>
+            </section>
+            <section>
+                Pour $N\geq2$, on sépare la somme dans la DFT en indices pairs et impairs:
+                $$\sqrt{N} DFT(f)[k] =
+                \sum_{j=0}^{N/2-1}f[2j]e^{-\frac{2i\pi}{N} (2j)k} +
+                \sum_{j=0}^{N/2-1}f[2j+1]e^{-\frac{2i\pi}{N} (2j+1)k},$$
+            </section>
+            <section>
+                Dont on déduit facilement:
+                $\sqrt{N} DFT(f)[k] =
+                \sum_{j=0}^{N/2-1}f[2j]e^{-\frac{2i\pi}{N/2} jk} +
+                e^{-\frac{2i\pi}{N}k}
+                \sum_{j=0}^{N/2-1}f[2j+1]e^{-\frac{2i\pi}{N/2} jk}.$
+            </section>
+            <section>
+
+            </section>
+
+
+
+        <section>
+            <h2>Crédit</h2>
+            <p>Crédit à <b>Jez Swanson</b> pour les animations. Source : <a href="http://www.jezzamon.com/fourier/">https://github.com/Jezzamonn/fourier</a></p>
+            <h2>TP3 - FFT</h2>
+            <ul class="eductnetlist" id="yui_3_17_2_1_1581079977365_77"><li class="activity resource modtype_resource " id="module-18782"><div id="yui_3_17_2_1_1581079977365_76"><div class="mod-indent-outer" id="yui_3_17_2_1_1581079977365_75"><div class="mod-indent"></div><div class="activity-wrapper" id="yui_3_17_2_1_1581079977365_74"><div class="activityinstance" id="yui_3_17_2_1_1581079977365_73"><a class="" onclick="window.open('https://educnet.enpc.fr/mod/resource/view.php?id=18782&amp;redirect=1', '', 'width=620,height=450,toolbar=no,location=no,menubar=no,copyhistory=no,status=no,directories=no,scrollbars=yes,resizable=yes'); return false;" href="https://educnet.enpc.fr/mod/resource/view.php?id=18782" id="yui_3_17_2_1_1581079977365_72"><img src="https://educnet.enpc.fr/theme/image.php/adaptable/core/1574268697/f/pdf" class="iconlarge activityicon" alt=" " role="presentation"><span class="instancename" id="yui_3_17_2_1_1581079977365_71">Énoncé<span class="accesshide "> Fichier</span></span></a></div></div></div></div></li><li class="activity resource modtype_resource " id="module-18783"><div><div class="mod-indent-outer"><div class="mod-indent"></div><div class="activity-wrapper"><div class="activityinstance"><a class="" onclick="window.open('https://educnet.enpc.fr/mod/resource/view.php?id=18783&amp;redirect=1', '', 'width=620,height=450,toolbar=no,location=no,menubar=no,copyhistory=no,status=no,directories=no,scrollbars=yes,resizable=yes'); return false;" href="https://educnet.enpc.fr/mod/resource/view.php?id=18783"><img src="https://educnet.enpc.fr/theme/image.php/adaptable/core/1574268697/f/archive" class="iconlarge activityicon" alt=" " role="presentation"><span class="instancename">Programme initial<span class="accesshide "> Fichier</span></span></a></div></div></div></div></li><li class="activity assign modtype_assign " id="module-18816"><div><div class="mod-indent-outer"><div class="mod-indent"></div><div class="activity-wrapper"><div class="activityinstance"><a class="" onclick="" href="https://educnet.enpc.fr/mod/assign/view.php?id=18816"><img src="https://educnet.enpc.fr/theme/image.php/adaptable/assign/1574268697/icon" class="iconlarge activityicon" alt=" " role="presentation"><span class="instancename">Tris<span class="accesshide "> Devoir</span></span></a></div></div></div></div></li></ul>
+            <a href="https://educnet.enpc.fr/course/view.php?id=619" class="courselink">Accéder à la page du cours</a>
+        </section>
+    </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

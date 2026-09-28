@@ -87,7 +87,7 @@ int addition(int a, int b);
 <h4 style="color: #fb2c40;">❌ À éviter</h4>
 
 ```cpp
-int PI = 3.14; // Globale
+int PI = 3.14; // Globale (et mauvais type)
 
 void foo(int n) {
     int x; // Non initialisée
@@ -179,6 +179,7 @@ int main() {
             m.data[y * m.width + x] = 0;
         }
     }
+    delete[] m.data;
     return 0;
 }
 ```
@@ -215,6 +216,7 @@ int main() {
     m.data = new int[9];
 
     setElement(m, 1, 1, 42); // Utilisation propre et sécurisée !
+    delete[] m.data;
     return 0;
 }
 ```
@@ -388,7 +390,7 @@ struct Vector {
 };
 
 int Vector::norm() { // méthode f() de obj1 (définition)
-	return sqrt((x * x) + (x * x) + (y * y) + (y * y));
+	return sqrt(x * x + y * y);
 }
 ```
 
@@ -436,10 +438,12 @@ void Matrice::detruit() {
 }
 
 double Matrice::get(int i,int j) {
+    assert(0<=i && i<m && 0<=j && j<n);
     return t[i+m*j];
 }
 
 void Matrice::set(int i,int j,double x) {
+    assert(0<=i && i<m && 0<=j && j<n);
     t[i+m*j]=x;
 }
 
@@ -459,8 +463,8 @@ Matrice operator*(Matrice A,Matrice B) {
     }
     Matrice C;
     C.cree(A.m,B.n);
-    for (int i=0;i<A.m;i++)
-        for (int j=0;j<B.n;j++) {
+    for (int i=0;i<C.m;i++)
+        for (int j=0;j<C.n;j++) {
             // Cij=Ai0*B0j+Ai1*B1j+...
             C.set(i,j,0);
             for (int k=0;k<A.n;k++)
@@ -613,14 +617,14 @@ struct Matrice {
 };
 ```
 
-Les champs des Matrices ne sont plus utilisé:
-<a style="color: #2c40fb">seulement leurs méthodes</a> sont utilisés.
+Les champs des Matrices ne sont plus utilisés:
+<a style="color: #2c40fb">seulement leurs méthodes</a> sont utilisées.
 
 
 
 ## Interface
-- Le concepteur et l'utilisateur: accords sur les méthodes disponibles (<a style="color: #2c40fb">fonctionnalitées</a>)
-- Le concepteur <a style="color: #2c40fb">implémente</a> (comme il le veux)
+- Le concepteur et l'utilisateur : accord sur les méthodes disponibles (<a style="color: #2c40fb">fonctionnalités</a>)
+- Le concepteur <a style="color: #2c40fb">implémente</a> (comme il le veut)
 - L'utilisateur <a style="color: #2c40fb">utilise</a> les fonctionnalités 
 - Le concepteur peut y <a style="color: #2c40fb">retoucher</a> sans gêner l'utilisateur.
 - L'utilisateur peut <a style="color: #2c40fb">changer</a> d'implémentation
@@ -709,7 +713,8 @@ int main() {
 
 
 ## Structure VS Classes en C++
-Une structure est une classe où <a style="color: #2c40fb">tout est public</a>.
+Une structure est une classe où <a style="color: #2c40fb">tout est public</a>...<br>
+jusqu'à rencontrer private:
 
 
 
@@ -727,7 +732,7 @@ public:
     Matrice operator*(Matrice B);
 };
 ```
-Ici `m`, `n` et `t` sont _protégées_.
+Ici `m`, `n` et `t` sont _protégés_.
 
 
 

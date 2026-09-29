@@ -1,5 +1,5 @@
 # C++
-## Chapitre 2
+## Chapitre 3
 
 
 
@@ -323,7 +323,7 @@ Lorsqu'on passe un objet en paramètre à une fonction, il est recopié.
 
 
 ### Première idée
-Passer les arguments par références
+Passer les arguments par référence
 ```cpp
 void solve(Matrice& A, Vecteur& B, Vecteur& X) {
 ...
@@ -332,12 +332,12 @@ void solve(Matrice& A, Vecteur& B, Vecteur& X) {
 <span class="fragment">
 
 ### <a style="color: #fb2c40">Danger</a>
-A et b peuvent être modifié! Et ça peut être génant..
+A et b peuvent être modifiés ! Et ça peut être gênant...
 </span>
 
 
 
-## Référence constantes
+## Références constantes
 ```cpp
 void solve(const Matrice& A, const Vecteur& B, Vecteur& X) {
 ...
@@ -345,14 +345,14 @@ void solve(const Matrice& A, const Vecteur& B, Vecteur& X) {
 ```
 Demander au compilateur de vérifier qu'une variable passée par référence :
 - n'est pas modifiée par la fonction.
-- ni par les sous-fonctions appelé par solve
+- ni par les autres méthodes appelées par solve
 
 
 
 
 ## Référence constantes
 ### Comment le compilateur fait ?
-Pour les fonctions et sous-fonctions:
+Pour les fonctions et sous-fonctions :
 
 => Il ne se base <a style="color: #fb2c40">que sur la déclaration</a> et non sur sa définition complète.
 
@@ -361,9 +361,11 @@ Pour les fonctions et sous-fonctions:
 ## Référence constantes
 Remplacer "obj o" par "const obj& o" est utile pour <a style="color: #2c40fb">accélerer les programmes.</a>
 
-(surtout si les objects sont de tailles importantes)
+(surtout si les objects sont de taille importante)
 
+Aussi pour string, qui est un objet (stockant un tableau de char)
 
+Pas pour les types de base (int, float, etc)
 
 ## Méthodes constantes
 ```cpp
@@ -379,7 +381,7 @@ int Point::getX() const {
     return x;
 }
 ```
-Une méthode constante peut lire les membres, mais ne peut pas les modifiers.
+Une méthode constante peut lire les membres, mais ne peut pas les modifier.
 
 
 
@@ -388,7 +390,7 @@ Une méthode constante peut lire les membres, mais ne peut pas les modifiers.
 - Découverte de <a style="color: #fb2c40">bug</a> à la compilation
 - Programme plus <a style="color: #2c40fb">rapide</a>
 
-
+=> <a style="color: #fb2c40">Réflexe à adopter</a> : en écrivant la méthode, se demander "peut-elle être const ?"
 
 
 ## Le destructeur
@@ -859,7 +861,7 @@ const Vect& Vect::operator=(const Vect& v) {
 
 
 ## Page du cours
-http://imagine.enpc.fr/~monasse/Info/
+https://educnet.enpc.fr/user/index.php?id=1202
 
 ### Fiche de référence du cours
-Poly : <a style="color: #fb2c40">page 154</a>
+Poly : <a style="color: #fb2c40">page 50</a>
